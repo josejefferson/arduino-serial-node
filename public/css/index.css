@@ -1,0 +1,42 @@
+body {
+	align-items: center;
+	cursor: pointer;
+	display: flex;
+	height: 100vh;
+	justify-content: center;
+	margin: 0;
+}
+
+body:not([data-connected="0"]):active img.lamp {
+	transform: scale(0.8);
+}
+
+img.lamp {
+	transition: .1s ease;
+	width: 350px;
+}
+
+body[data-switched="off"] {
+	background: black;
+}
+
+body[data-switched="off"] .lamp-on {
+	display: none;
+}
+
+body[data-switched="on"] {
+	background: white;
+}
+
+body[data-switched="on"] .lamp-off {
+	display: none;
+}
+
+body[data-connected="0"] {
+	background-color: gray;
+	cursor: not-allowed;
+}
+
+body[data-connected="0"] img.lamp {
+	opacity: 0.3;
+}
