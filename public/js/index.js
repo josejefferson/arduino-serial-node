@@ -1,10 +1,11 @@
 const $body = document.body
 $body.addEventListener('click', toggleLamp)
 
+const voice = new Artyom()
 const socket = io()
 const lamp = { id: 'lamp1', status: { switchedOn: false } }
 
-function toggleLamp() {
+ function toggleLamp() {
 	if (!socket.connected) return
 	lamp.status.switchedOn = !lamp.status.switchedOn
 	navigator.vibrate(100)
@@ -23,6 +24,18 @@ socket.on('changedLampState', (changedLamp) => {
 	if (changedLamp.id !== lamp.id) return
 	lamp.status = changedLamp.status
 	updateLamp()
+})
+
+voice.addCommands({
+	indexes: ['acender', 'apagar', 'ligar', 'desligar', 'LED', 'lâmpada', 'luz'],
+	action: toggleLamp
+})
+
+voice.initialize({
+	lang: 'pt-BR',
+	debug: true,
+	continuous: true,
+	listen: true
 })
 
 function updateLamp() {
