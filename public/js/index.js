@@ -4,9 +4,14 @@ $body.addEventListener('click', toggleLamp)
 const voice = new Artyom()
 const socket = io()
 const lamp = { id: 'lamp1', status: { switchedOn: false } }
+const switchSound = new Audio('sounds/switch.mp3')
 
- function toggleLamp() {
+function toggleLamp() {
 	if (!socket.connected) return
+
+	switchSound.currentTime = 0
+	switchSound.play()
+
 	lamp.status.switchedOn = !lamp.status.switchedOn
 	navigator.vibrate(100)
 	updateLamp()
